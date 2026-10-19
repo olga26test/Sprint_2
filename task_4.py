@@ -21,14 +21,11 @@ class EmployeeSalary:
     @classmethod
     def set_hourly_payment(cls, hourly_payment):
         cls.hourly_payment = hourly_payment
-        return cls.hourly_payment
 
     def salary(self):
         salary = self.hours * self.hourly_payment
-        # кроме зарплаты добавила в возврат имя, часы и почту для наглядности
-        return f'Сотрудник: {self.name}, отработанные часы: {self.hours}, эл. почта: {self.email}, зарплата за неделю: {salary}'
+        return salary
 
-    
 # дополнительно добавила вызовы методов для проверки их работы:
 employee_salary_1 = EmployeeSalary.get_hours('Black', 2, 'black@mail.ru')
 print(employee_salary_1.salary())
