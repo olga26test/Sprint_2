@@ -8,14 +8,16 @@ class EmployeeSalary:
         self.email = email
 
     @classmethod
-    def get_hours(cls, name, rest_days, email):
-        hours = (7 - rest_days) * 8
+    def get_hours(cls, name, hours, rest_days, email):
+        if hours is None:
+            hours = (7 - rest_days) * 8
         return cls(name, hours, rest_days, email)
 
     @classmethod
-    def get_email(cls, name, hours, rest_days):
+    def get_email(cls, name, hours, rest_days, email):
         cls.name = name
-        email = f"{cls.name.lower()}@email.com" # добавила метод .lower(), т.к. эл.почта обычно в низком регистре
+        if email is None:
+            email = f"{cls.name.lower()}@email.com" # добавила метод .lower(), т.к. эл.почта обычно в низком регистре
         return cls(name, hours, rest_days, email)
 
     @classmethod
@@ -27,14 +29,13 @@ class EmployeeSalary:
         return salary
 
 # дополнительно добавила вызовы методов для проверки их работы:
-employee_salary_1 = EmployeeSalary.get_hours('Black', 2, 'black@mail.ru')
+employee_salary_1 = EmployeeSalary.get_hours('Black', None, 2, 'black@mail.ru')
 print(employee_salary_1.salary())
 
-employee_salary_2 = EmployeeSalary.get_email('Smith', 30, 2)
+employee_salary_2 = EmployeeSalary.get_email('Smith', 30, 2, None)
 print(employee_salary_2.salary())
 
 employee_salary_3 = EmployeeSalary.set_hourly_payment(500)
 print(EmployeeSalary.hourly_payment)
 employee_salary_3 = EmployeeSalary('Lebedev', 10, 4, 'lebedev@mail.ru')
 print(employee_salary_3.salary())
-
